@@ -12,9 +12,9 @@ export default class BootScene extends Phaser.Scene {
   }
 
   preload () {
-    this.load.image('sky', 'space3.png');
-    this.load.image('logo', 'phaser3-logo.png');
-    this.load.image('red', 'red.png');
+    this.load.spritesheet('patrick', 'patrick.png', { frameWidth: 24, frameHeight: 36, endFrame: 5 });
+    this.load.image('starfield', 'starfield.png')
+    
     this.load.on('progress', this.onLoadProgress, this);
     this.load.on('complete', this.onLoadComplete, this);
     this.createProgressBar();

@@ -4,8 +4,8 @@ import MenuScene from 'scenes/menu';
 
 window.game = new Phaser.Game({
   // See <https://github.com/photonstorm/phaser/blob/master/src/boot/Config.js>
-  width: 800,
-  height: 600,
+  width: 432,
+  height: 768,
   // zoom: 1,
   // resolution: 1,
   type: Phaser.AUTO,

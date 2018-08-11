@@ -1,0 +1,66 @@
+{ "frames": {
+   "patrick 0.ase": {
+    "frame": { "x": 0, "y": 0, "w": 24, "h": 36 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 24, "h": 36 },
+    "sourceSize": { "w": 24, "h": 36 },
+    "duration": 125
+   },
+   "patrick 1.ase": {
+    "frame": { "x": 24, "y": 0, "w": 24, "h": 36 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 24, "h": 36 },
+    "sourceSize": { "w": 24, "h": 36 },
+    "duration": 150
+   },
+   "patrick 2.ase": {
+    "frame": { "x": 48, "y": 0, "w": 24, "h": 36 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 24, "h": 36 },
+    "sourceSize": { "w": 24, "h": 36 },
+    "duration": 150
+   },
+   "patrick 3.ase": {
+    "frame": { "x": 72, "y": 0, "w": 24, "h": 36 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 24, "h": 36 },
+    "sourceSize": { "w": 24, "h": 36 },
+    "duration": 150
+   },
+   "patrick 4.ase": {
+    "frame": { "x": 96, "y": 0, "w": 24, "h": 36 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 24, "h": 36 },
+    "sourceSize": { "w": 24, "h": 36 },
+    "duration": 150
+   },
+   "patrick 5.ase": {
+    "frame": { "x": 120, "y": 0, "w": 24, "h": 36 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 24, "h": 36 },
+    "sourceSize": { "w": 24, "h": 36 },
+    "duration": 125
+   }
+ },
+ "meta": {
+  "app": "http://www.aseprite.org/",
+  "version": "1.2.5",
+  "image": "/var/www/html/ld42/app/static/assets/patrick.png",
+  "format": "RGBA8888",
+  "size": { "w": 144, "h": 36 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "Layer 3", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}
