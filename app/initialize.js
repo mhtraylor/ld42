@@ -1,6 +1,8 @@
 import BootScene from 'scenes/boot';
 import DefaultScene from 'scenes/default';
 import MenuScene from 'scenes/menu';
+import PauseScene from './scenes/pause';
+import QuitScene from './scenes/quit';
 
 window.game = new Phaser.Game({
   // See <https://github.com/photonstorm/phaser/blob/master/src/boot/Config.js>
@@ -49,6 +51,7 @@ window.game = new Phaser.Game({
   physics: {
     default: 'arcade',
     arcade: {
+        debug: true,
       gravity: {
         y: 180
       }
@@ -57,7 +60,9 @@ window.game = new Phaser.Game({
   scene: [
     BootScene,
     DefaultScene,
-    MenuScene
+    MenuScene,
+    PauseScene,
+    QuitScene
   ],
 
 });

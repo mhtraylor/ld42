@@ -14,6 +14,7 @@ export default class BootScene extends Phaser.Scene {
   preload () {
     this.load.spritesheet('patrick', 'patrick.png', { frameWidth: 24, frameHeight: 36, endFrame: 5 });
     this.load.image('starfield', 'starfield.png')
+    this.load.image('square', 'square.png')
     
     this.load.on('progress', this.onLoadProgress, this);
     this.load.on('complete', this.onLoadComplete, this);

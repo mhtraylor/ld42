@@ -1,4 +1,5 @@
-//import Note from '../components/platform/note'
+import Note from '../components/note'
+import Player from '../components/player'
 
 const numTracks = 4
 
@@ -7,6 +8,11 @@ export default class DefaultScene extends Phaser.Scene {
         super('default')
         
         this.patrick
+        this.phases = []
+        this.notes = []
+
+        this.strumLine
+
         this.tracks = (() => {
             let left = 0
             let arr = []
@@ -34,75 +40,60 @@ export default class DefaultScene extends Phaser.Scene {
 
     create () {
 
-        // let note = new Note({
-        //     name: 'note'
-        // })
+        let graphics = this.add.graphics()
+        graphics.fillStyle(0xFF0000, 1)
+        graphics.fillCircle(216, -200, 300)
 
-        let graphics = this.add.graphics();
-        graphics.fillStyle(0xFF0000, 1);
-        graphics.fillCircle(216, -200, 300);
 
-        this.patrick = this.add.sprite(this.tracks[0], 600, 'patrick')
-        this.patrick.scaleX = 2        
-        this.patrick.scaleY = 2
+        this.strumLine = this.add.graphics()
+        this.strumLine.lineStyle(2, 0xFF00FF)
+        this.strumLine.beginPath();
+        this.strumLine.moveTo(0, 670);
+        this.strumLine.lineTo(432, 670);
+        this.strumLine.closePath();
+        this.strumLine.strokePath();
 
-        this.input.keyboard.on('keydown_A', this.movePlayer, this)
-        this.input.keyboard.on('keydown_S', this.movePlayer, this)
-        this.input.keyboard.on('keydown_D', this.movePlayer, this)
-        this.input.keyboard.on('keydown_F', this.movePlayer, this)
 
-        this.input.keyboard.once('keydown_Q', this.quit, this);
+        let note = new Note(this, this.tracks[1], 300)
+        note.init()
+        this.notes.push(note)
+
+
+        this.patrick = new Player(this, this.tracks[1], 650)
+        this.patrick.init()
+
+        
+        this.physics.world.addOverlap(this.notes[0].sprite, this.patrick.sprite, this.overlapMe)
+
+        this.input.keyboard.on('keydown_P', this.pause, this)
+        this.input.keyboard.on('keydown_Q', this.quit, this)
+    }
+
+    overlapMe() {
+        console.log('overlap')
     }
 
     update () {
-        this.starfield.tilePositionY -= 0.1;
-    }
+        this.starfield.tilePositionY -= 0.1
+        this.patrick.update()
 
-    movePlayer (key) {
-        const playerPosition = {
-            x: this.patrick.x,
-            y: this.patrick.y
-        }
-      
-        switch (key.code) {
-            case 'KeyA':
-                this.patrick.x = this.tracks[0]
-                break
-
-            case 'KeyS':
-                this.patrick.x = this.tracks[1]
-                break
-
-            case 'KeyD':
-                this.patrick.x = this.tracks[2]
-                break
-
-            case 'KeyF':
-                this.patrick.x = this.tracks[3]
-                break
+        for (let note of this.notes) {
+            note.update()
         }
 
-        this.phasePlayer(playerPosition)
-    }
-
-    
-    phasePlayer ({ x, y }) {
-        let phase = this.physics.add.sprite(x, y, 'patrick')
-        phase.scaleX = 2
-        phase.scaleY = 2
-        phase.tint = '0xAEFA4D'
-        phase.alpha = 0.25
-        phase.blendMode = 'ADD'
-
-        if (this.patrick.x > x) {
-            phase.setVelocity(-75, 0, 0)
-        } else if (this.patrick.x < x) {
-            phase.setVelocity(75, 0, 0)
+        for (let phase of this.phases) {
+            phase.update()
         }
     }
 
     quit () {
-        this.scene.start('menu');
+        this.scene.launch('quit');
+        this.scene.pause();
+    }
+
+    pause () {
+        this.scene.launch('pause');
+        this.scene.pause();
     }
     
     shutdown () {}
