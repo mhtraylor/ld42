@@ -48,7 +48,7 @@ export default class DefaultScene extends Phaser.Scene {
         this.patrick = new Player(this, this.tracks[1], 650)
         this.patrick.init()
         this.input.keyboard.on('keydown_P', this.pause, this)
-        this.input.keyboard.once('keydown_Q', this.quit, this)
+        this.input.keyboard.on('keydown_Q', this.quit, this)
     }
 
     update () {
@@ -60,7 +60,8 @@ export default class DefaultScene extends Phaser.Scene {
     }
 
     quit () {
-        this.scene.start('menu');
+        this.scene.launch('quit');
+        this.scene.pause();
     }
 
     pause () {
