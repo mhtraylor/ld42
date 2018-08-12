@@ -59,10 +59,10 @@ export default class DefaultScene extends Phaser.Scene {
         this.notes.push(note)
 
 
-        this.patrick = new Player(this, this.tracks[1], 650)
+        this.patrick = new Player(this, this.tracks[1], 670)
         this.patrick.init()
 
-        
+
         this.physics.world.addOverlap(this.notes[0].sprite, this.patrick.sprite, this.overlapMe)
 
         this.input.keyboard.on('keydown_P', this.pause, this)

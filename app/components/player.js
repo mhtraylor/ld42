@@ -13,8 +13,13 @@ export default class Player {
             repeat: -1
         })
 
-        this.sprite = this.scene.physics.add.sprite(x, y, 'patrick', 0).setScale(2)
+        this.sprite = this.scene.physics.add.sprite(x, y, 'patrick', 0)
+                            .setScale(2)
+                            .setOrigin(0.5, 1)
         this.sprite.body.allowGravity = false
+        this.sprite.body.debugBodyColor = 0xFFFF00
+        this.sprite.body.setSize(1,1)
+        this.sprite.body.setOffset(this.sprite.width / 2, this.sprite.height / 2)
         
 
         // Player inputs
