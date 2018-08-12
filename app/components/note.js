@@ -10,7 +10,7 @@ export default class Note {
     }
 
     init() {
-        
+
     }
 
     update() {
