@@ -1,5 +1,6 @@
-import Note from '../components/note'
-import Player from '../components/player'
+import Note from 'components/note'
+import Player from 'components/player'
+import ScoreController from 'controllers/score';
 
 const numTracks = 4
 
@@ -7,6 +8,8 @@ export default class DefaultScene extends Phaser.Scene {
     constructor () {
         super('default')
         
+        this.scoreController = new ScoreController(this)
+
         this.patrick
         this.phases = []
         this.notes = []
@@ -27,7 +30,7 @@ export default class DefaultScene extends Phaser.Scene {
         })()
     }
 
-    init (data) {
+    init(data) {
         this.starfield = this.add.tileSprite(216, 384, 432, 768, 'starfield')
     }
 
@@ -38,7 +41,8 @@ export default class DefaultScene extends Phaser.Scene {
     // sound blaster 16
     // 56k connection
 
-    create () {
+    create() {
+        this.scoreController.init()
 
         let graphics = this.add.graphics()
         graphics.fillStyle(0xFF0000, 1)
@@ -62,18 +66,17 @@ export default class DefaultScene extends Phaser.Scene {
         this.patrick = new Player(this, this.tracks[1], 670)
         this.patrick.init()
 
-
         this.physics.world.addOverlap(this.notes[0].sprite, this.patrick.sprite, this.overlapMe)
 
         this.input.keyboard.on('keydown_P', this.pause, this)
         this.input.keyboard.on('keydown_Q', this.quit, this)
     }
 
-    overlapMe() {
+    overlapMe(spr1, spr2) {
         console.log('overlap')
     }
 
-    update () {
+    update() {
         this.starfield.tilePositionY -= 0.1
         this.patrick.update()
 
@@ -86,15 +89,15 @@ export default class DefaultScene extends Phaser.Scene {
         }
     }
 
-    quit () {
+    quit() {
         this.scene.launch('quit');
         this.scene.pause();
     }
 
-    pause () {
+    pause() {
         this.scene.launch('pause');
         this.scene.pause();
     }
     
-    shutdown () {}
+    shutdown() {}
 }
