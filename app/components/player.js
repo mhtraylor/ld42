@@ -13,8 +13,13 @@ export default class Player {
             repeat: -1
         })
 
-        this.sprite = this.scene.physics.add.sprite(x, y, 'patrick', 0).setScale(2)
+        this.sprite = this.scene.physics.add.sprite(x, y, 'patrick', 0)
+                            .setScale(2)
+                            .setOrigin(0.5, 1)
         this.sprite.body.allowGravity = false
+        this.sprite.body.debugBodyColor = 0xFFFF00
+        this.sprite.body.setSize(1,1)
+        this.sprite.body.setOffset(this.sprite.width / 2, this.sprite.height / 2)
         
 
         // Player inputs
@@ -33,14 +38,17 @@ export default class Player {
         switch (key.code) {
             case 'KeyA':
                 this.sprite.x = this.scene.tracks[0]
+                this.scene.scoreController.addScore('good')
                 break
 
             case 'KeyS':
                 this.sprite.x = this.scene.tracks[1]
+                this.scene.scoreController.addScore('great')
                 break
 
             case 'KeyD':
                 this.sprite.x = this.scene.tracks[2]
+                this.scene.scoreController.addScore('perfect')
                 break
 
             case 'KeyF':
