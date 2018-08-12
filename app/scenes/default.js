@@ -62,10 +62,11 @@ export default class DefaultScene extends Phaser.Scene {
         this.patrick = new Player(this, this.tracks[1], 650)
         this.patrick.init()
 
-
+        
         this.physics.world.addOverlap(this.notes[0].sprite, this.patrick.sprite, this.overlapMe)
 
-        this.input.keyboard.once('keydown_Q', this.quit, this)
+        this.input.keyboard.on('keydown_P', this.pause, this)
+        this.input.keyboard.on('keydown_Q', this.quit, this)
     }
 
     overlapMe() {
@@ -86,7 +87,13 @@ export default class DefaultScene extends Phaser.Scene {
     }
 
     quit () {
-        this.scene.start('menu');
+        this.scene.launch('quit');
+        this.scene.pause();
+    }
+
+    pause () {
+        this.scene.launch('pause');
+        this.scene.pause();
     }
     
     shutdown () {}
