@@ -13,8 +13,10 @@ export default class Player {
             repeat: -1
         })
 
-        this.sprite = scene.add.sprite(x, y, 'patrick', 0).setScale(2)
+        this.sprite = this.scene.physics.add.sprite(x, y, 'patrick', 0).setScale(2)
+        this.sprite.body.allowGravity = false
         
+
         // Player inputs
         this.scene.input.keyboard.on('keydown_A', this.move, this)
         this.scene.input.keyboard.on('keydown_S', this.move, this)
@@ -53,6 +55,9 @@ export default class Player {
 
     init() {
         this.sprite.anims.play('run', true)
+    }
+
+    update() {
     }
 
     destroy() {

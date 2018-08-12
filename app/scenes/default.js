@@ -1,4 +1,4 @@
-import Phase from '../components/phase'
+import Note from '../components/note'
 import Player from '../components/player'
 
 const numTracks = 4
@@ -9,6 +9,10 @@ export default class DefaultScene extends Phaser.Scene {
         
         this.patrick
         this.phases = []
+        this.notes = []
+
+        this.strumLine
+
         this.tracks = (() => {
             let left = 0
             let arr = []
@@ -36,23 +40,45 @@ export default class DefaultScene extends Phaser.Scene {
 
     create () {
 
-        // let note = new Note(this, {
-        //     pos: [100, 100],
-        //     name: 'note'
-        // })
-
         let graphics = this.add.graphics()
         graphics.fillStyle(0xFF0000, 1)
         graphics.fillCircle(216, -200, 300)
 
+
+        this.strumLine = this.add.graphics()
+        this.strumLine.lineStyle(2, 0xFF00FF)
+        this.strumLine.beginPath();
+        this.strumLine.moveTo(0, 670);
+        this.strumLine.lineTo(432, 670);
+        this.strumLine.closePath();
+        this.strumLine.strokePath();
+
+
+        let note = new Note(this, this.tracks[1], 300)
+        note.init()
+        this.notes.push(note)
+
+
         this.patrick = new Player(this, this.tracks[1], 650)
         this.patrick.init()
+
+
+        this.physics.world.addOverlap(this.notes[0].sprite, this.patrick.sprite, this.overlapMe)
 
         this.input.keyboard.once('keydown_Q', this.quit, this)
     }
 
+    overlapMe() {
+        console.log('overlap')
+    }
+
     update () {
         this.starfield.tilePositionY -= 0.1
+        this.patrick.update()
+
+        for (let note of this.notes) {
+            note.update()
+        }
 
         for (let phase of this.phases) {
             phase.update()
