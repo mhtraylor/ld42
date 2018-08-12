@@ -9,7 +9,7 @@ export default class Player {
         anims.create({
             key: 'run',
             frames: anims.generateFrameNumbers('patrick', { start: 0, end: 5 }),
-            frameRate: 9,
+            frameRate: 7,
             repeat: -1
         })
 

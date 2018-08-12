@@ -24,6 +24,8 @@ export default class Phase {
         const x = this.sprite.x
         const y = this.sprite.y
 
+        this.sprite.alpha -= 0.005
+
         if (x < 0 || x > 432 || y < 0 || y > 800) this.destroy()
     }
 
