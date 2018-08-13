@@ -12,6 +12,8 @@ export default class BootScene extends Phaser.Scene {
   }
 
   preload () {
+    this.load.audio('spacelord', 'spacelord.ogg')
+
     this.load.spritesheet('patrick', 'patrick.png', { frameWidth: 24, frameHeight: 36, endFrame: 5 })
     this.load.image('patrick-win', 'patrick-win.png')
     this.load.image('logo', 'logo-abernathium.png')
@@ -32,7 +34,7 @@ export default class BootScene extends Phaser.Scene {
     this.load.image('text-great', 'text/great.png')
     this.load.image('text-good', 'text/good.png')
 
-    
+
     this.load.on('progress', this.onLoadProgress, this);
     this.load.on('complete', this.onLoadComplete, this);
     this.createProgressBar();
