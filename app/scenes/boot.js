@@ -13,9 +13,11 @@ export default class BootScene extends Phaser.Scene {
 
   preload () {
     this.load.spritesheet('patrick', 'patrick.png', { frameWidth: 24, frameHeight: 36, endFrame: 5 })
+    this.load.image('patrick-win', 'patrick-win.png')
     this.load.image('logo', 'logo-abernathium.png')
     this.load.image('starfield', 'starfield.png')
     this.load.image('square', 'square.png')
+    this.load.image('earth', 'earth.png')
 
     // scene text ui
     this.load.image('text-press-any-key', 'text/press-any-key.png')

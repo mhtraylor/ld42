@@ -54,6 +54,11 @@ export default class MenuScene extends Phaser.Scene {
 
         this.input.on('pointerup', this.start, this)
         this.input.keyboard.on('keydown', this.start, this)
+        //this.input.keyboard.on('keydown_W', this.win, this)
+    }
+
+    win() {
+        this.scene.start('win')
     }
 
     update() {
