@@ -15,7 +15,7 @@ export default class Note {
 
     update() {
         if (this.sprite.y > 768) {
-            this.sprite.y = 300
+            //this.sprite.y = 300
         }
 
         this.sprite.y += 2
