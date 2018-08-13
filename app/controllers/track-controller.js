@@ -1,10 +1,10 @@
 const file = require('./midi-controller')
 
 const TrackRange = new Map([
-    [1, ['C', 'C#', 'D']],
-    [2, ['D#', 'E', 'F']],
-    [3, ['F#', 'G', 'G#']],
-    [4, ['A', 'A#', 'B']]
+    [0, ['C', 'C#', 'D']],
+    [1, ['D#', 'E', 'F']],
+    [2, ['F#', 'G', 'G#']],
+    [3, ['A', 'A#', 'B']]
 ])
 
 function getTrackNumForNote(name) {
@@ -41,9 +41,15 @@ function generateTrack(callback) {
         idx++;
         if (idx < len) {
             setTimeout(doNext, wait);
+        } else {
+            return;
         }
     }
-    doNext();
+    if (idx < len) {
+        doNext();
+    } else {
+        callback(null)
+    }
 } exports.generateTrack = generateTrack;
 
 

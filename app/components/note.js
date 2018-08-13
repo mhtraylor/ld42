@@ -1,5 +1,5 @@
 export default class Note {
-    constructor(scene, x, y) {
+    constructor(scene, x, y, lenY) {
         this.scene = scene
 
         this.sprite = this.scene.physics.add.sprite(x, y, 'square', 0)
@@ -7,6 +7,7 @@ export default class Note {
                             .setAlpha(0.5)
         this.sprite.originY = 0
         this.sprite.body.allowGravity = false
+        //this.sprite.scaleY = lenY / 100
     }
 
     init() {

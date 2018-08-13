@@ -62,7 +62,7 @@ export default class DefaultScene extends Phaser.Scene {
         this.tc.generateTrack(data => {
             if (data) {
                 console.log(data)
-                let note = new Note(this, this.tracks[data.note], 300)
+                let note = new Note(this, this.tracks[data.note], 300, data.time)
                 note.init()
                 this.notes.push(note)
             }
