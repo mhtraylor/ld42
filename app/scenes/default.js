@@ -65,6 +65,8 @@ export default class DefaultScene extends Phaser.Scene {
                 let note = new Note(this, this.tracks[data.note], 300, data.time)
                 note.init()
                 this.notes.push(note)
+            } else {
+                // this should mean the song has ended
             }
         })
 
