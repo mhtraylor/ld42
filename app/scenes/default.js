@@ -112,6 +112,7 @@ export default class DefaultScene extends Phaser.Scene {
     pauseMusic() {
         if (this.song.isPlaying) this.song.pause()
     }
+    
     stopMusic() {
         if (this.song.isPlaying) this.song.stop()
     }

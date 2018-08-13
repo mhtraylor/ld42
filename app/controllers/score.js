@@ -92,6 +92,14 @@ export default class ScoreController {
         this.streakUI.setText('Streak: ' + this.streak)
 
         this.registerScores()
+
+        if (this.totalScore > 30000) {
+            this.scene.patrick.updateSpeed(20)
+        } else if (this.totalScore > 10000) {
+            this.scene.patrick.updateSpeed(16)
+        } else if (this.totalScore > 3000) {
+            this.scene.patrick.updateSpeed(12)
+        }
     }
 
     registerScores() {

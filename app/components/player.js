@@ -74,6 +74,18 @@ export default class Player {
         this.sprite.anims.play('run', true)
     }
 
+    updateSpeed(val) {
+        this.scene.anims.remove('run')
+        this.scene.anims.create({
+            key: 'run',
+            frames: this.scene.anims.generateFrameNumbers('patrick', { start: 0, end: 5 }),
+            frameRate: val,
+            repeat: -1
+        })
+
+        this.sprite.anims.play('run', true)
+    }
+
     update() { }
 
     destroy() {

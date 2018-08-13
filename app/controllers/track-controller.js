@@ -3,6 +3,16 @@ import spacelord from 'data/spacelord'
 import Note from 'components/note'
 
 
+const OFFSET = 2.85
+const SET_Y = -200
+
+const GET_SPEED = (y) => {
+    const dist = 780 - 200
+    const newDist = Math.abs(780 - y)
+
+    return newDist * 3 / dist
+}
+
 const TRACK_RANGE = new Map([
     [0, ['C', 'C#', 'D']],
     [1, ['D#', 'E', 'F']],
@@ -31,9 +41,11 @@ export default class TrackController {
     }
 
     async generateTracks() {
-        // Last note timestamp in ms - default to first note
-        let lastTime = this.midiNotes[0].time
+        // Last note timestamp - default to note time from spawn to strum line offset
+        let lastTime = OFFSET
         let index = 0
+
+        this.scene.song.play()
 
         // Build the track in real time
         for (const note of this.midiNotes) {
@@ -61,9 +73,10 @@ export default class TrackController {
         const noteTrack = this.getTrackNumForNote(data.name)
         const config = {
             x: this.scene.tracks[noteTrack],
-            y: 300,
+            y: SET_Y,
             name: 'note_' + noteNum,
-            noteData: data
+            noteData: data,
+            speed: GET_SPEED(SET_Y)
         }
 
         // Generate the note
