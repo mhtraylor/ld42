@@ -7,7 +7,7 @@ const numTracks = 4
 export default class DefaultScene extends Phaser.Scene {
     constructor () {
         super('default')
-        
+
         this.scoreController = new ScoreController(this)
         this.tc = require('../controllers/track-controller')
 
@@ -33,6 +33,8 @@ export default class DefaultScene extends Phaser.Scene {
 
     init(data) {
         this.starfield = this.add.tileSprite(216, 384, 432, 768, 'starfield')
+        this.song = this.sound.add('spacelord')
+        this.trackStarted = false
     }
 
     // pentium 2
@@ -49,7 +51,6 @@ export default class DefaultScene extends Phaser.Scene {
         graphics.fillStyle(0xFF0000, 1)
         graphics.fillCircle(216, -200, 300)
 
-
         this.strumLine = this.add.graphics()
         this.strumLine.lineStyle(2, 0xFF00FF)
         this.strumLine.beginPath();
@@ -58,25 +59,17 @@ export default class DefaultScene extends Phaser.Scene {
         this.strumLine.closePath();
         this.strumLine.strokePath();
 
-
         this.tc.generateTrack(data => {
             if (data) {
-                console.log(data)
                 let note = new Note(this, this.tracks[data.note], 300, data.time)
                 note.init()
                 this.notes.push(note)
+                if (!this.song.isPlaying) this.song.play()
             } else {
                 // this should mean the song has ended
+                if (this.song.isPlaying) this.song.stop()
             }
         })
-
-        /*
-        let note = new Note(this, this.tracks[1], 300)
-        note.init()
-        this.notes.push(note)
-        */
-
-
 
         this.patrick = new Player(this, this.tracks[1], 670)
         this.patrick.init()
@@ -88,19 +81,15 @@ export default class DefaultScene extends Phaser.Scene {
     }
 
     overlapMe(spr1, spr2) {
-        console.log('overlap')
     }
 
     update() {
         this.starfield.tilePositionY -= 0.2
         this.patrick.update()
-        
+
         for (let note of this.notes) {
             note.update()
         }
-        
-
-        this.t
 
         for (let phase of this.phases) {
             phase.update()
@@ -108,14 +97,23 @@ export default class DefaultScene extends Phaser.Scene {
     }
 
     quit() {
+        this.pauseMusic()
         this.scene.launch('quit');
         this.scene.pause();
     }
 
     pause() {
+        this.pauseMusic()
         this.scene.launch('pause');
         this.scene.pause();
     }
-    
+
     shutdown() {}
+
+    pauseMusic() {
+        if (this.song.isPlaying) this.song.pause()
+    }
+    stopMusic() {
+        if (this.song.isPlaying) this.song.stop()
+    }
 }
