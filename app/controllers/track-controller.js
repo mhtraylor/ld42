@@ -53,6 +53,11 @@ export default class TrackController {
             lastTime = note.time
             index++
         }
+
+        // wait 2 seconds
+        await this.sleep(8000)
+
+        this.scene.scene.start('win')
     }
 
     generateNote(data, noteNum) {

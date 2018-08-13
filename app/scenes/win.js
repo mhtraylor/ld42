@@ -1,11 +1,14 @@
+import CONST from 'data/const'
+
 export default class WinScene extends Phaser.Scene {
     constructor() {
         super('win')
 
         this.starfield
-        this.congratulations
+        this.great
         this.patrick
         this.earth
+        this.score
     }
 
     init(data) {
@@ -30,6 +33,22 @@ export default class WinScene extends Phaser.Scene {
             duration: 10000,
             ease: 'Power2',
         })
+
+        this.great = this.add.sprite(216, 80, 'text-great')
+                                    .setOrigin(0.5, 0)
+
+
+        const settings = {
+            fill: CONST.colors.white,
+            fontFamily: CONST.fonts.default,
+            fontSize: 20,
+            fontStyle: 'bold'
+        }
+        this.scoreUI = this.add.text(216, 160, 
+                                    this.registry.get('score'), 
+                                    settings)
+                                .setOrigin(0.5, 0)
+                                .setShadow(0, 1, CONST.colors.black, 5)
 
         this.earth = this.add.sprite(216, 600, 'earth')
                             .setOrigin(0.5, 0)
