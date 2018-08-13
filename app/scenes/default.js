@@ -92,7 +92,7 @@ export default class DefaultScene extends Phaser.Scene {
     }
 
     update() {
-        this.starfield.tilePositionY -= 0.1
+        this.starfield.tilePositionY -= 0.2
         this.patrick.update()
         
         for (let note of this.notes) {

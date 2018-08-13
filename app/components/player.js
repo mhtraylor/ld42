@@ -9,7 +9,7 @@ export default class Player {
         anims.create({
             key: 'run',
             frames: anims.generateFrameNumbers('patrick', { start: 0, end: 5 }),
-            frameRate: 7,
+            frameRate: 8,
             repeat: -1
         })
 
@@ -65,8 +65,7 @@ export default class Player {
         this.sprite.anims.play('run', true)
     }
 
-    update() {
-    }
+    update() { }
 
     destroy() {
         this.sprite.destroy()
