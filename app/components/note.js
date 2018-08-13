@@ -1,24 +1,36 @@
-export default class Note {
-    constructor(scene, x, y, lenY) {
+export default class Note extends Phaser.GameObjects.Sprite {
+
+    constructor(scene, x, y) {
+        super(scene, x, y)
         this.scene = scene
 
-        this.sprite = this.scene.physics.add.sprite(x, y, 'square', 0)
-                            .setScale(2)
-                            .setAlpha(0.5)
-        this.sprite.originY = 0
-        this.sprite.body.allowGravity = false
-        //this.sprite.scaleY = lenY / 100
+        this.setTexture('square')
+        this.setPosition(x, y)
+        this.setScale(2)
+        this.setAlpha(0.5)
+
+        this.noteData
+        this.speed
+        this.name
     }
 
-    init() {
+    init(config) {
+        this.noteData = config.noteData || {}
+        this.speed = config.speed || 2
+        this.name = config.name || 'note'
 
+        this.scene.add.existing(this)
+
+        if (this.noteData.firstNote) {
+            console.log('>>>> first note')
+        }
+
+        if (this.noteData.lastNote) {
+            console.log('>>>> last note')
+        }
     }
 
     update() {
-        if (this.sprite.y > 768) {
-            //this.sprite.y = 300
-        }
-
-        this.sprite.y += 2
+        this.y += this.speed
     }
 }

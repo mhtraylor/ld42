@@ -10,6 +10,7 @@
     "build": "brunch build --production"
   },
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
     "phaser": "^3.7.1"
   },
   "devDependencies": {

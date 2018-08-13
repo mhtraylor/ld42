@@ -56,8 +56,20 @@ export default class Player {
                 break
         }
 
-        for (var i = 0; i < 6; i ++) {
-            this.scene.phases.push(new Phase(this.scene, { x: playerPosition.x, y: playerPosition.y + i * 2 }, this.sprite))
+        // Create phases
+        for (var i = 0; i < 2; i ++) {
+            let config = {
+                x: playerPosition.x,
+                y: playerPosition.y,
+                name: 'phase_' + i
+            }
+
+            // Generate a new phase
+            let phase = new Phase(this.scene, config.x, config.y)
+            phase.init(config)
+
+            // Apply it to the phases array
+            this.scene.phases.add(phase)
         }
     }
 

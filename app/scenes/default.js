@@ -1,6 +1,6 @@
-import Note from 'components/note'
 import Player from 'components/player'
 import ScoreController from 'controllers/score';
+import TrackController from 'controllers/track-controller';
 
 const numTracks = 4
 
@@ -9,11 +9,11 @@ export default class DefaultScene extends Phaser.Scene {
         super('default')
 
         this.scoreController = new ScoreController(this)
-        this.tc = require('../controllers/track-controller')
+        this.trackController = new TrackController(this)
 
         this.patrick
-        this.phases = []
-        this.notes = []
+        this.phases
+        this.notes
 
         this.strumLine
 
@@ -35,6 +35,9 @@ export default class DefaultScene extends Phaser.Scene {
         this.starfield = this.add.tileSprite(216, 384, 432, 768, 'starfield')
         this.song = this.sound.add('spacelord')
         this.trackStarted = false
+
+        this.phases = this.add.group()
+        this.notes = this.add.group()
     }
 
     // pentium 2
@@ -46,52 +49,47 @@ export default class DefaultScene extends Phaser.Scene {
 
     create() {
         this.scoreController.init()
+        this.trackController.init()
+
 
         let graphics = this.add.graphics()
         graphics.fillStyle(0xFF0000, 1)
         graphics.fillCircle(216, -200, 300)
 
+
         this.strumLine = this.add.graphics()
         this.strumLine.lineStyle(2, 0xFF00FF)
-        this.strumLine.beginPath();
-        this.strumLine.moveTo(0, 670);
-        this.strumLine.lineTo(432, 670);
-        this.strumLine.closePath();
-        this.strumLine.strokePath();
+        this.strumLine.beginPath()
+        this.strumLine.moveTo(0, 670)
+        this.strumLine.lineTo(432, 670)
+        this.strumLine.closePath()
+        this.strumLine.strokePath()
 
-        this.tc.generateTrack(data => {
-            if (data) {
-                let note = new Note(this, this.tracks[data.note], 300, data.time)
-                note.init()
-                this.notes.push(note)
-                if (!this.song.isPlaying) this.song.play()
-            } else {
-                // this should mean the song has ended
-                if (this.song.isPlaying) this.song.stop()
-            }
-        })
 
         this.patrick = new Player(this, this.tracks[1], 670)
         this.patrick.init()
 
-        this.physics.world.addOverlap(this.notes[0].sprite, this.patrick.sprite, this.overlapMe)
+
+        this.physics.world.addOverlap(this.notes, this.patrick.sprite, this.overlapMe)
+
 
         this.input.keyboard.on('keydown_P', this.pause, this)
         this.input.keyboard.on('keydown_Q', this.quit, this)
     }
 
     overlapMe(spr1, spr2) {
+        console.log(spr1)
     }
 
     update() {
         this.starfield.tilePositionY -= 0.2
         this.patrick.update()
 
-        for (let note of this.notes) {
+        for (const note of this.notes.getChildren()) {
             note.update()
         }
 
-        for (let phase of this.phases) {
+        for (const phase of this.phases.getChildren()) {
             phase.update()
         }
     }
