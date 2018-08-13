@@ -12,9 +12,24 @@ export default class BootScene extends Phaser.Scene {
   }
 
   preload () {
-    this.load.spritesheet('patrick', 'patrick.png', { frameWidth: 24, frameHeight: 36, endFrame: 5 });
+    this.load.spritesheet('patrick', 'patrick.png', { frameWidth: 24, frameHeight: 36, endFrame: 5 })
+    this.load.image('logo', 'logo-abernathium.png')
     this.load.image('starfield', 'starfield.png')
     this.load.image('square', 'square.png')
+
+    // scene text ui
+    this.load.image('text-press-any-key', 'text/press-any-key.png')
+    this.load.image('text-keys', 'text/keys.png')
+    this.load.image('text-keys-pause', 'text/keys-pause.png')
+    this.load.image('text-paused', 'text/paused.png')
+    this.load.image('text-quit', 'text/quit.png')
+    this.load.image('text-yes-no', 'text/yes-no.png')
+
+    // gameplay text ui
+    this.load.image('text-perfect', 'text/perfect.png')
+    this.load.image('text-great', 'text/great.png')
+    this.load.image('text-good', 'text/good.png')
+
     
     this.load.on('progress', this.onLoadProgress, this);
     this.load.on('complete', this.onLoadComplete, this);
