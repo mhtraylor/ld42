@@ -2,16 +2,7 @@ import 'babel-polyfill'
 import spacelord from 'data/spacelord'
 import Note from 'components/note'
 
-
 const OFFSET = 2.85
-const SET_Y = -200
-
-const GET_SPEED = (y) => {
-    const dist = 780 - 200
-    const newDist = Math.abs(780 - y)
-
-    return newDist * 3 / dist
-}
 
 const TRACK_RANGE = new Map([
     [0, ['C', 'C#', 'D']],
@@ -29,6 +20,8 @@ export default class TrackController {
         this.trackData
         this.midiNotes
         this.totalNumberNotes
+
+        this.verticalOffset = 200
     }
 
     init() {
@@ -73,10 +66,10 @@ export default class TrackController {
         const noteTrack = this.getTrackNumForNote(data.name)
         const config = {
             x: this.scene.tracks[noteTrack],
-            y: SET_Y,
+            y: this.verticalOffset,
             name: 'note_' + noteNum,
             noteData: data,
-            speed: GET_SPEED(SET_Y)
+            speed: this.getSpeed(this.verticalOffset)
         }
 
         // Generate the note
@@ -104,5 +97,16 @@ export default class TrackController {
 
     sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms))
+    }
+
+    getSpeed(y) {
+        const dist = 780 - 200
+        const newDist = Math.abs(780 - y)
+
+        return newDist * 3 / dist
+    }
+
+    setVerticalOffset(val) {
+        this.verticalOffset = val
     }
 }

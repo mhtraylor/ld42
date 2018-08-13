@@ -4,12 +4,14 @@ export default class Player {
     constructor(scene, x, y) {
         this.scene = scene
 
+        this.speed = 8
+
         // Create the animations we need from the player spritesheet
         const anims = scene.anims
         anims.create({
             key: 'run',
             frames: anims.generateFrameNumbers('patrick', { start: 0, end: 5 }),
-            frameRate: 8,
+            frameRate: this.speed,
             repeat: -1
         })
 
@@ -75,11 +77,13 @@ export default class Player {
     }
 
     updateSpeed(val) {
+        this.speed = val
+
         this.scene.anims.remove('run')
         this.scene.anims.create({
             key: 'run',
             frames: this.scene.anims.generateFrameNumbers('patrick', { start: 0, end: 5 }),
-            frameRate: val,
+            frameRate: this.speed,
             repeat: -1
         })
 

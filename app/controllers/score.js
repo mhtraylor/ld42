@@ -94,11 +94,20 @@ export default class ScoreController {
         this.registerScores()
 
         if (this.totalScore > 30000) {
-            this.scene.patrick.updateSpeed(20)
+            this.scene.trackController.setVerticalOffset(-200)
+            if (this.scene.patrick.speed < 20) {
+                this.scene.patrick.updateSpeed(20)
+            }
         } else if (this.totalScore > 10000) {
-            this.scene.patrick.updateSpeed(16)
+            this.scene.trackController.setVerticalOffset(0)
+            if (this.scene.patrick.speed < 16) {
+                this.scene.patrick.updateSpeed(16)
+            }
         } else if (this.totalScore > 3000) {
-            this.scene.patrick.updateSpeed(12)
+            this.scene.trackController.setVerticalOffset(100)
+            if (this.scene.patrick.speed < 12) {
+                this.scene.patrick.updateSpeed(12)
+            }
         }
     }
 
