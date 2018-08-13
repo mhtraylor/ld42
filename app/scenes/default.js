@@ -9,6 +9,7 @@ export default class DefaultScene extends Phaser.Scene {
         super('default')
         
         this.scoreController = new ScoreController(this)
+        this.tc = require('../controllers/track-controller')
 
         this.patrick
         this.phases = []
@@ -58,9 +59,23 @@ export default class DefaultScene extends Phaser.Scene {
         this.strumLine.strokePath();
 
 
+        this.tc.generateTrack(data => {
+            if (data) {
+                console.log(data)
+                let note = new Note(this, this.tracks[data.note], 300, data.time)
+                note.init()
+                this.notes.push(note)
+            } else {
+                // this should mean the song has ended
+            }
+        })
+
+        /*
         let note = new Note(this, this.tracks[1], 300)
         note.init()
         this.notes.push(note)
+        */
+
 
 
         this.patrick = new Player(this, this.tracks[1], 670)
@@ -79,10 +94,13 @@ export default class DefaultScene extends Phaser.Scene {
     update() {
         this.starfield.tilePositionY -= 0.2
         this.patrick.update()
-
+        
         for (let note of this.notes) {
             note.update()
         }
+        
+
+        this.t
 
         for (let phase of this.phases) {
             phase.update()
