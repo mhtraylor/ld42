@@ -4,6 +4,8 @@ export default class Phase extends Phaser.GameObjects.Sprite {
         super(scene, x, y)
         this.scene = scene
 
+        this.scene.add.existing(this)
+
         this.setTexture('patrick')
         this.setPosition(x, y)
         this.setScale(2)
@@ -22,8 +24,6 @@ export default class Phase extends Phaser.GameObjects.Sprite {
             x: this.x,
             y: this.y
         }
-
-        this.scene.add.existing(this)
     }
 
     update() {

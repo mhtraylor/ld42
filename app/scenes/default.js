@@ -1,6 +1,7 @@
 import Player from 'components/player'
 import ScoreController from 'controllers/score';
 import TrackController from 'controllers/track-controller';
+import Phase from '../components/phase';
 
 const numTracks = 4
 
@@ -66,19 +67,19 @@ export default class DefaultScene extends Phaser.Scene {
         this.strumLine.strokePath()
 
 
-        this.patrick = new Player(this, this.tracks[1], 670)
+        this.patrick = new Player(this, this.tracks[1], 669)
         this.patrick.init()
 
 
-        this.physics.world.addOverlap(this.notes, this.patrick.sprite, this.overlapMe)
+        this.physics.world.addOverlap(this.notes, this.patrick.sprite, this.noteCollision)
 
 
         this.input.keyboard.on('keydown_P', this.pause, this)
         this.input.keyboard.on('keydown_Q', this.quit, this)
     }
 
-    overlapMe(spr1, spr2) {
-        console.log(spr1)
+    noteCollision(note, player) {
+        note.handleHit()
     }
 
     update() {

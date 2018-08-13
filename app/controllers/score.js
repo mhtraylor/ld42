@@ -72,6 +72,11 @@ export default class ScoreController {
         this.updateTotal(value)
     }
 
+    miss() {
+        this.resetStreak()
+        this.updateTotal(0)
+    }
+
     updateStreak() {
         if (this.streak < 26) this.streak++
     }

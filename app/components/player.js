@@ -38,17 +38,14 @@ export default class Player {
         switch (key.code) {
             case 'KeyA':
                 this.sprite.x = this.scene.tracks[0]
-                this.scene.scoreController.addScore('good')
                 break
 
             case 'KeyS':
                 this.sprite.x = this.scene.tracks[1]
-                this.scene.scoreController.addScore('great')
                 break
 
             case 'KeyD':
                 this.sprite.x = this.scene.tracks[2]
-                this.scene.scoreController.addScore('perfect')
                 break
 
             case 'KeyF':
@@ -65,7 +62,7 @@ export default class Player {
             }
 
             // Generate a new phase
-            let phase = new Phase(this.scene, config.x, config.y)
+            let phase = new Phase(this.scene, config.x, config.y, 'patrick', 0)
             phase.init(config)
 
             // Apply it to the phases array
